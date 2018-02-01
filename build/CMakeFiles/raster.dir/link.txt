@@ -1,0 +1,1 @@
+/bin/c++    -std=c++0x -Wall -pedantic    CMakeFiles/raster.dir/src/Image.cpp.o CMakeFiles/raster.dir/src/main.cpp.o  -o raster -rdynamic 

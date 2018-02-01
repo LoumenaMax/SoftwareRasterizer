@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <memory>
 
 #define TINYOBJLOADER_IMPLEMENTATION
 #include "tiny_obj_loader.h"
@@ -84,19 +85,35 @@ void resize_obj(std::vector<tinyobj::shape_t> &shapes){
 
 int main(int argc, char **argv)
 {
-	if(argc < 3) {
-      cout << "Usage: Assignment1 meshfile imagefile" << endl;
-      return 0;
-   }
+	if(argc < 6) {
+		cout << "Usage: Assignment1 meshfile imagefile <width> <height> <mode>" << endl;
+	return 0;
+	}
 	// OBJ filename
 	string meshName(argv[1]);
 	string imgName(argv[2]);
 
 	//set g_width and g_height appropriately!
-	g_width = g_height = 100;
+	try {
+  		g_width = stoi(argv[3]);
+		g_height = stoi(argv[4]);
+	}
+	catch(std::invalid_argument& e){
+		// if no conversion could be performed
+	}
+	catch(std::out_of_range& e){
+		// if the converted value would fall out of the range of the result type 
+		// or if the underlying function (std::strtol or std::strtoull) sets errno 
+		// to ERANGE.
+	}
+	catch(...) {
+		// everything else
+	}
 
-   //create an image
-	auto image = make_shared<Image>(g_width, g_height);
+	//g_width = g_height = 100;
+
+   	//create an image
+	auto image = std::make_shared<Image>(g_width, g_height);
 
 	// triangle buffer
 	vector<unsigned int> triBuf;
@@ -108,7 +125,7 @@ int main(int argc, char **argv)
 	vector<tinyobj::material_t> objMaterials; // material
 	string errStr;
 	
-   bool rc = tinyobj::LoadObj(shapes, objMaterials, errStr, meshName.c_str());
+	bool rc = tinyobj::LoadObj(shapes, objMaterials, errStr, meshName.c_str());
 	/* error checking on read */
 	if(!rc) {
 		cerr << errStr << endl;
@@ -120,12 +137,12 @@ int main(int argc, char **argv)
 	cout << "Number of triangles: " << triBuf.size()/3 << endl;
 
  	//keep this code to resize your object to be within -1 -> 1
-   resize_obj(shapes); 
+	resize_obj(shapes); 
 
 	//TODO add code to iterate through each triangle and rasterize it 
 	
 	//write out the image
-   image->writeToFile(imgName);
+	image->writeToFile(imgName);
 
 	return 0;
 }

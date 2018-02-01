@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 
 # Name of the project
-project(raster)
+project(Assignment1)
 
 # Use glob to get the list of all source files.
 file(GLOB_RECURSE SOURCES "src/*.cpp")

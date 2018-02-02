@@ -6,16 +6,6 @@
 
 #IncludeRegexTransform: 
 
-//home/mloumena/csc471/asgn01/src/Image.cpp
-iostream
--
-cassert
--
-Image.h
-//home/mloumena/csc471/asgn01/src/Image.h
-stb_image_write.h
-//home/mloumena/csc471/asgn01/src/stb_image_write.h
-
 //home/mloumena/csc471/asgn01/src/Image.h
 string
 -
@@ -35,20 +25,6 @@ tiny_obj_loader.h
 //home/mloumena/csc471/asgn01/src/tiny_obj_loader.h
 Image.h
 //home/mloumena/csc471/asgn01/src/Image.h
-
-//home/mloumena/csc471/asgn01/src/stb_image_write.h
-stdio.h
--
-stdarg.h
--
-stdlib.h
--
-string.h
--
-math.h
--
-assert.h
--
 
 //home/mloumena/csc471/asgn01/src/tiny_obj_loader.h
 string
